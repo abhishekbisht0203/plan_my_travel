@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan My Travel - Your Travel Experts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans bg-[url('https://wallpaperaccess.com/full/878615.jpg')] bg-cover bg-center">
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Plan My Travel</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="{% url 'flights' %}" class="hover:text-blue-200 transition duration-300">Flights</a></li>
+                    <li><a href="{% url 'hotels' %}" class="hover:text-blue-200 transition duration-300">Hotels</a></li>
+                    <li><a href="#" class="hover:text-blue-200 transition duration-300">Deals</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="px-4 py-2 border border-white rounded hover:bg-blue-700 transition duration-300">{{ user.username }}</li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}" class="px-4 py-2 border border-white rounded hover:bg-blue-700 transition duration-300">Login</a></li>
+                    {% endif %}
+                </ul>
+                
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8">
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Search Your Perfect Trip</h2>
+            <div class="flex space-x-4 mb-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">
+                    <i class="fas fa-plane-departure mr-2"></i>Flights
+                </button>
+                <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition duration-300">
+                    <i class="fas fa-hotel mr-2"></i>Hotels
+                </button>
+                
+            </div>
+            <form class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label for="from" class="block text-sm font-medium text-gray-700">From</label>
+                    <input type="text" id="from" name="from" placeholder="City or Airport" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2">
+                </div>
+                <div>
+                    <label for="to" class="block text-sm font-medium text-gray-700">To</label>
+                    <input type="text" id="to" name="to" placeholder="City or Airport" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2">
+                </div>
+                <div>
+                    <label for="depart" class="block text-sm font-medium text-gray-700">Depart</label>
+                    <input type="date" id="depart" name="depart" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2">
+                </div>
+                <div>
+                    <label for="return" class="block text-sm font-medium text-gray-700">Return</label>
+                    <input type="date" id="return" name="return" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2">
+                </div>
+                <div class="md:col-span-4">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">
+                        <i class="fas fa-search mr-2"></i>Search Flights
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-6 text-center border-b-2 border-gray-200">Hot Deals</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/68/9c/b1/la-vaiencia-beach-resort.jpg?w=900&h=-1&s=1" alt="Beach Resort" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Tropical Paradise</h3>
+                        <p class="text-gray-600 mb-2">7 nights all-inclusive</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$999</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://www.tripsavvy.com/thmb/zgTLNjGzPGXc6h7uRMrtac_l_FA=/2124x1416/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-549397327-573eb6523df78c6bb01451b4.jpg" alt="City Break" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Kerala Beach</h3>
+                        <p class="text-gray-600 mb-2">3 nights with flights</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$599</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://deih43ym53wif.cloudfront.net/cola-beach-goa-india-shutterstock_772145203_82b97bd9df.jpeg" alt="Adventure Tour" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Adventure Tour</h3>
+                        <p class="text-gray-600 mb-2">5 days of excitement</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$799</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://wallpapercave.com/wp/YbGWmpg.jpg" alt="Beach Resort" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Beach Resort</h3>
+                        <p class="text-gray-600 mb-2">7 nights all-inclusive</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$999</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://wallpaperset.com/w/full/2/7/e/200067.jpg" alt="City Break" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2"> City resort</h3>
+                        <p class="text-gray-600 mb-2">3 nights with flights</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$599</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://cdn.wallpapersafari.com/44/24/texqi5.jpg" alt="Adventure Tour" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Bali Beach</h3>
+                        <p class="text-gray-600 mb-2">5 days of excitement</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-blue-600">$799</span>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="mt-12 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-6">Popular Destinations</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://wallpaperaccess.com/full/1721414.jpg" alt="Paris" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Paris</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://images6.alphacoders.com/109/1092054.jpg" alt="Tokyo" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Tokyo</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://a.cdn-hotels.com/gdcs/production15/d151/660d2266-2abb-4217-95e7-6c026c82849a.jpg" alt="New York" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">New York</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://th.bing.com/th/id/OIP.3_84OYXpQddWDqwwoabtbQHaEo?w=1920&h=1200&rs=1&pid=ImgDetMain" alt="Sydney" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Sydney</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://wallpapercave.com/wp/wp3170957.jpg" alt="Paris" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Goa</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://static.toiimg.com/photo/msid-48538494,width-96,height-65.cms" alt="Tokyo" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Kerala</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://wallpaperaccess.com/full/373636.jpg" alt="New York" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Bali </span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg group">
+                    <img src="https://th.bing.com/th/id/R.7d7cc90e1993479adea1f6bba9f3a9e1?rik=MZpd8r94tnDCsQ&riu=http%3a%2f%2feurotalk.com%2fblog%2fwp-content%2fuploads%2f2015%2f06%2fDubai2.jpeg&ehk=NYZkjHQhvGK72vxKQl3SmpoCacDsyjWO%2bnf3%2fnxhoRY%3d&risl=&pid=ImgRaw&r=0" alt="Sydney" class="w-full h-40 object-cover transition duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white text-lg font-semibold">Dubai</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-12 bg-blue-500 text-white p-8 rounded-lg shadow-md">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-semibold mb-2">Subscribe to Our Newsletter</h2>
+                    <p>Get the latest travel deals and updates straight to your inbox!</p>
+                </div>
+                <form class="flex w-full md:w-auto">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-900">
+                    <button type="submit" class="bg-yellow-500 text-blue-900 px-4 py-2 rounded-r-md hover:bg-yellow-400 transition duration-300">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="mt-12">
+            <h2 class="text-2xl font-semibold mb-6">What Our Travelers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="/placeholder.svg?height=50&width=50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">John Doe</h3>
+                            <div class="text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Amazing experience! The trip was well-organized and the accommodations were top-notch. Will definitely book again!"</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="/placeholder.svg?height=50&width=50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">Jane Smith</h3>
+                            <div class="text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Great service and fantastic deals! I saved a lot on my last vacation thanks to Make My Trip."</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="/placeholder.svg?height=50&width=50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">Mike Johnson</h3>
+                            <div class="text-yellow-500">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The customer service was excellent. They helped me plan the perfect family vacation. Highly recommended!"</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto grid  grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-lg font-semibold mb-4">About Us</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Our Story</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Team</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Support</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">FAQs</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Booking Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Flight Booking</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Hotel Reservations</a></li>
+                    <li><a href="#" class="hover:text-blue-300 transition duration-300">Holiday Packages</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-2xl hover:text-blue-300 transition duration-300"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto mt-8 pt-8 border-t border-gray-700 text-center">
+            <p>&copy; 2024 Plan My Travel. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
